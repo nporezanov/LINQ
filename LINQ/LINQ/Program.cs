@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,16 +44,16 @@ namespace LINQ
             };
             Group[] groups = { new Group(1,1,"Employer"),
             new Group(2,3,"Admin"),
-            new Group(3,2,"employee"),
-            new Group(4,4,"employee(s)")
+            new Group(3,2,"employee")
+           
             };
             User[] users = { new User(1, 1, "Kuz"),
                 new User(2,2,"IvanovR"),
                 new User(3,2,"Bas"),
                 new User(4,3,"Levin"),
-                new User(5,4,"Masl"),
+                new User(5,3,"Masl"),
                 new User(6,3,"Took"),
-                new User(7,4,"Griva"),
+                new User(7,3,"Griva"),
             };
             UserInfo[] infos = { new UserInfo(1, "D.G.Kuznec", 38, 125623),
                 new UserInfo(2, "R.O. Ivanov", 36, 72042),
@@ -63,12 +64,22 @@ namespace LINQ
                 new UserInfo(7, "L.L.Grivanskiy", 35, 39751)
             };
             //Выведите все группы и количество пользователей в этих группах
-            // Create a query that selects e-mail addresses.
+            // SELECT id_topic, COUNT(id_topic) FROM posts
+            // GROUP BY id_topic;
             var Egroups = from grp in groups
-                         select grp.Name;
-            Console.WriteLine("Список групп:");
-            // Execute the query and display the results.
-            foreach (string s in Egroups) Console.WriteLine(" " + s);
+                          group grp by grp.Name;
+            foreach (IGrouping<int,int,Group> g in Egroups)
+            {
+                Console.WriteLine(g.Key);
+                foreach (var t in g)
+                    Console.WriteLine(t.Name);
+                Console.WriteLine();
+            }
+
+
+          //  Console.WriteLine("Список групп:");
+            
+           // foreach (string s in Egroups) Console.WriteLine(" " + s);
             Console.ReadKey();
 
         }
