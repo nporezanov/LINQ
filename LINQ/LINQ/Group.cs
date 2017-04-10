@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/*Реализация списков, в данном случае, не имеет значения.
+/*Подсказка:
+ * Реализация списков, в данном случае, не имеет значения.
 Добавьте к своим запросам join, т.к. не вся необходимая информация находиться в одной коллекции.
 Затем group by для группировки коллекции по указанному вами полю.
 var query2 = (from user in users

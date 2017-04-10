@@ -63,23 +63,36 @@ namespace LINQ
                 new UserInfo(6, "G.H.Tukin", 24, 43000),
                 new UserInfo(7, "L.L.Grivanskiy", 35, 39751)
             };
-            //Выведите все группы и количество пользователей в этих группах
-            // SELECT id_topic, COUNT(id_topic) FROM posts
-            // GROUP BY id_topic;
-            var Egroups = from grp in groups
-                          group grp by grp.Name;
-            foreach (IGrouping<int,int,Group> g in Egroups)
-            {
-                Console.WriteLine(g.Key);
-                foreach (var t in g)
-                    Console.WriteLine(t.Name);
-                Console.WriteLine();
-            }
+ 
+            #region Выведите все группы и количество пользователей в этих группах
+            var a_task = (from user in users
+                          join grp in groups on user.GroupId equals grp.Id
+                          group grp by grp.Name into usergrp
+                          select new { CategoryName = usergrp.Key, UserCount = usergrp.Count() }).ToList();
+            foreach (var item in a_task)
+                Console.WriteLine(item.ToString());
+            #endregion
+            var Eusers = from usr in users
+                         select usr.Login;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("вывод списка всех пользователей по логинам:");
+            foreach (string s in Eusers) Console.WriteLine(" " + s);
 
+            var Einfo = from inf in infos
+                        where inf.Age > 25
+                        orderby inf.Age descending
+                        select inf.Age;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("список тех кому больше 25 лет:");
+            foreach (int s in Einfo) Console.WriteLine(" " + s);
 
-          //  Console.WriteLine("Список групп:");
-            
-           // foreach (string s in Egroups) Console.WriteLine(" " + s);
+            var Erole = from cust in rols
+                        where cust.Name == "support"
+                        orderby cust.Name
+                        select cust.Name;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            foreach (string s in Erole) Console.WriteLine(" " + s);
+
             Console.ReadKey();
 
         }
