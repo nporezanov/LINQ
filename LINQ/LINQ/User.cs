@@ -17,5 +17,9 @@ namespace LINQ
             Login = login;
             GroupId = GroupID;
         }
+        public override string ToString()
+        {
+            return $"{Id},\t{Login},\t{GroupId}";
+        }
     }
 }

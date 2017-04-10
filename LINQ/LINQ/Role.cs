@@ -16,5 +16,9 @@ namespace LINQ
             Id = id;
             Name = name;
         }
+        public override string ToString()
+        {
+            return $"{Id},\t{Name}";
+        }
     }
 }

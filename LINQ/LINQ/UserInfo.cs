@@ -19,5 +19,9 @@ namespace LINQ
             Salary = salary;
             UserId = userid;
         }
+        public override string ToString()
+        {
+            return $"{Name},\t{Age},\t{Salary},\t{UserId}";
+        }
     }
 }
