@@ -72,6 +72,20 @@ namespace LINQ
             foreach (var item in a_task)
                 Console.WriteLine(item.ToString());
             #endregion
+            #region b.-||-, возраст которых больше 25
+
+            var b_task = (from user in users
+                          join grp in groups
+                          on user.GroupId equals grp.Id
+                          join inf in infos
+                          on user.Id equals inf.UserId
+                          where inf.Age>25
+                          group grp by grp.Name into usergrp
+                          select new { CategoryName = usergrp.Key, UserCount = usergrp.Count() }).ToList();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            foreach (var itemB in b_task)                
+                Console.WriteLine(itemB.ToString());
+            #endregion
             var Eusers = from usr in users
                          select usr.Login;
             Console.ForegroundColor = ConsoleColor.Yellow;
